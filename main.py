@@ -62,26 +62,7 @@ def main(m=3,N=4,p=0.95):
     f1 = m-1,
     f2 = N
 
-    dict = {1: 0.9065,
-            2: 0.7679,
-            3: 0.6841,
-            4: 0.6287,
-            5: 0.5892,
-            6: 0.5598,
-            7: 0.5365,
-            8: 0.5175,
-            9: 0.5017,
-            10: 0.4884,
-            range(11, 17): 0.4366,
-            range(17, 37): 0.3720,
-            range(37, 145): 0.3093}
-    Gt = 0
-    for key in dict.keys():
-        if f1 == key:
-            Gt = dict.get(key)
-            break
-        else:
-            Gt = 2500
+    Gt=(1 / (1 + (f2 - 1) / f.ppf(1 - (1 - p) / f2, f1, (f2 - 1) * f1)))[0]
 
     if Gp < Gt:
         print(f"Homogeneous dispersion with {p} probability:\t{round(Gp,3)} < {Gt}")
